@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 
+typedef int bool;
+#define true 1
+#define false 0
+
 Pnode mkNode(Cipher *data){
     Pnode newNode = malloc(sizeof (Node));
     newNode->prv = newNode->nxt = NULL;
@@ -42,12 +46,12 @@ int insertBetween(Pnode A, Pnode B, Pnode C){
         int op = askUser(A->data, C->data);
         if(op == 1) {
             mergeCipher(A->data, B->data);
-            free B;
+            free(B);
             return 0;
         }
         if(op == 3){
             mergeCipher(C->data, B->data);
-            free B;
+            free(B);
             return 0;
         }
         A->nxt = B, C->prv = B, B->prv = A, B->nxt = C;
@@ -59,12 +63,12 @@ int insertBetween(Pnode A, Pnode B, Pnode C){
     }
     if(isCompatible(A->data, B->data)){
         mergeCipher(A->data, B->data);
-        free B;
+        free(B);
         return 0;
     }
     if(isCompatible(B->data, C->data)){
         mergeCipher(C->data, B->data);
-        free B;
+        free(B);
         return 0;
     }
 }
@@ -79,7 +83,7 @@ bool listInsert(List *L, Cipher *data){
 
     Pnode it = L->fst;
     if(isBefore(data, it->data)){
-        if(mergeCipher(it->data, data)) free N;
+        if(mergeCipher(it->data, data)) free(N);
         else{
             it->prv = N, N->nxt = it, L->fst = N;
             L->sz++;
@@ -92,7 +96,7 @@ bool listInsert(List *L, Cipher *data){
     if(it->nxt == NULL){
         if(isSameDate(it->data, data))
             return mergeCipher(it->data, data);
-        if(mergeCipher(it->data, data)) free N;
+        if(mergeCipher(it->data, data)) free(N);
         else{
             it->nxt = N, N->prv = it, L->lst = N;
             L->sz++;

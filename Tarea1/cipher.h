@@ -3,10 +3,15 @@
 
 #include <time.h>
 
+typedef int bool;
+#define true 1
+#define false 0
+
 // Estructura con fecha y esquema de cifrado.
 typedef struct{
     time_t date;
-    // Cosas del cifrado como tal
+    char deciph[68];
+    char ciph[68];
 } Cipher;
 
 // Crea un nuevo esquema de cifrado y retorna un apuntador a el.

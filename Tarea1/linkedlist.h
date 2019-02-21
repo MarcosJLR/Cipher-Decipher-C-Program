@@ -9,6 +9,10 @@
 #include <stddef.h>
 #include "cipher.h"
 
+typedef int bool;
+#define true 1
+#define false 0
+
 // Estructura para un nodo de la lista
 // Contiene un apuntador al siguiente nodo y un apuntador al nodo 
 // anterior y un apuntador al esquema de cifrado que representa
