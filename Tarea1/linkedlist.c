@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
+#include "cipher.h"
 
 typedef int bool;
 #define true 1

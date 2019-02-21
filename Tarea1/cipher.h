@@ -15,7 +15,7 @@ typedef struct{
 } Cipher;
 
 // Crea un nuevo esquema de cifrado y retorna un apuntador a el.
-Cipher *mkCipher(/*...*/);
+Cipher *mkCipher(time_t dt, char *natural, char *encrypted);
 
 // Nos dice si el cifrado A es anterior al cifrado B
 bool isBefore(Cipher *A, Cipher *B);

@@ -7,11 +7,11 @@ typedef int bool;
 #define true 1
 #define false 0
 
-Cipher mkCipher(time_t dt, char *natural, char *encrypted){
-    Pnode newCipher = malloc(sizeof (Cipher));
+Cipher *mkCipher(time_t dt, char *natural, char *encrypted){
+    Cipher newCipher = malloc(sizeof (Cipher));
     int i;
     for(i=0;i<68;i++){
-    	newCipher->ciph = newCipher->deciph = NULL;
+    	newCipher->ciph = newCipher->deciph = '#';
     }
     int n=sizeof(natural)/sizeof(natural[0]);
     for(i=0;i<n;i++){
@@ -32,22 +32,24 @@ bool isSameDate(Cipher *A, Cipher *B){
 }
 bool isCompatible(Cipher *A, Cipher *B){
 	char *a,*b;
+	int i;
 	a=&(A->ciph[0]);
 	b=&(B->ciph[0]);
-	for(int i=0;i<68 && (*(a+i)==NULL || *(b+i)==NULL || *(a+i)==*(b+i));i++);
+	for(i=0;i<68 && (*(a+i)=='#' || *(b+i)=='#' || *(a+i)==*(b+i));i++);
 	if(i==68) return true;
 	else return false;
 }
 bool mergeCipher(Cipher *A, Cipher *B){
 	bool c=isCompatible(A,B);
+	char *a,*b;
 	a=&(A->ciph[0]);
 	b=&(B->ciph[0]);
 	if(!c) return false;
 	for(int i=0;i<68;i++){
-		if(*(a+i)==NULL && *(b+i)!=NULL){
+		if(*(a+i)=='#' && *(b+i)!='#'){
 			*(a+i)=*(b+i);
 		}
-		else if(*(a+i)!=NULL && *(b+i)==NULL){
+		else if(*(a+i)!='#' && *(b+i)=='#'){
 			*(b+i)=*(a+i);
 		}
 	}
@@ -55,11 +57,12 @@ bool mergeCipher(Cipher *A, Cipher *B){
 }
 bool encrypt(Cipher *A, char *s){
 	char c;
-	bool uncyph=true;;
+	bool uncyph=true;
+	char *a;
 	a=&(A->ciph[0]);
 	for(int i=0; *(s+i)!='\0'; i++){
 		c=*(a+*(s+i)-33);
-		if(c==NULL){
+		if(c=='#'){
 			uncyph=false;
 			*(s+i)='#';
 		}
@@ -72,11 +75,12 @@ bool encrypt(Cipher *A, char *s){
 }
 bool decrypt(Cipher *A, char *s){
 	char c;
-	bool uncyph=true;;
+	bool uncyph=true;
+	char *a;
 	a=&(A->deciph[0]);
 	for(int i=0; *(s+i)!='\0'; i++){
 		c=*(a+*(s+i)-33);
-		if(c==NULL){
+		if(c=='#'){
 			uncyph=false;
 			*(s+i)='#';
 		}
