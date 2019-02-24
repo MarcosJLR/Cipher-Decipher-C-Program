@@ -1,6 +1,9 @@
 #ifndef CIPHER_H
 #define CIPHER_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <time.h>
 
 typedef int bool;

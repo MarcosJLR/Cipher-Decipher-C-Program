@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "cipher.h"
 
 typedef int bool;
@@ -8,7 +5,7 @@ typedef int bool;
 #define false 0
 
 Cipher *mkCipher(time_t dt, char *natural, char *encrypted){
-    Cipher newCipher = malloc(sizeof (Cipher));
+    Cipher *newCipher = malloc(sizeof (Cipher));
     int i;
     for(i=0;i<68;i++){
     	newCipher->ciph = newCipher->deciph = '#';
