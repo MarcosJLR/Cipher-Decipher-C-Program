@@ -7,15 +7,13 @@ typedef int bool;
 Cipher *mkCipher(time_t dt, char *natural, char *encrypted){
     Cipher *newCipher = malloc(sizeof (Cipher));
     int i;
-    for(i=0;i<68;i++){
+    for(i=0;i<96;i++){
     	newCipher->ciph[i] = newCipher->deciph[i] = '#';
     }
     int n=sizeof(natural)/sizeof(natural[0]);
     for(i=0;i<n;i++){
-    	if(natural[i]>96) natural[i]-=26;
-    	if(encrypted[i]>96) encrypted[i]-=26;
-    	newCipher->ciph[natural[i]-33]=encrypted[i];
-    	newCipher->deciph[encrypted[i]-33]=natural[i];
+    	newCipher->ciph[natural[i]-32]=encrypted[i];
+    	newCipher->deciph[encrypted[i]-32]=natural[i];
     }
     newCipher->date = dt;
     return newCipher;
@@ -32,8 +30,8 @@ bool isCompatible(Cipher *A, Cipher *B){
 	int i;
 	a=&(A->ciph[0]);
 	b=&(B->ciph[0]);
-	for(i=0;i<68 && (*(a+i)=='#' || *(b+i)=='#' || *(a+i)==*(b+i));i++);
-	if(i==68) return true;
+	for(i=0;i<96 && (*(a+i)=='#' || *(b+i)=='#' || *(a+i)==*(b+i));i++);
+	if(i==96) return true;
 	else return false;
 }
 bool mergeCipher(Cipher *A, Cipher *B){
@@ -42,7 +40,7 @@ bool mergeCipher(Cipher *A, Cipher *B){
 	a=&(A->ciph[0]);
 	b=&(B->ciph[0]);
 	if(!c) return false;
-	for(int i=0;i<68;i++){
+	for(int i=0;i<96;i++){
 		if(*(a+i)=='#' && *(b+i)!='#'){
 			*(a+i)=*(b+i);
 		}
@@ -58,15 +56,12 @@ bool encrypt(Cipher *A, char *s){
 	char *a;
 	a=&(A->ciph[0]);
 	for(int i=0; *(s+i)!='\0'; i++){
-		c=*(a+*(s+i)-33);
+		c=*(a+*(s+i)-32);
 		if(c=='#'){
 			uncyph=false;
 			*(s+i)='#';
 		}
-		else{
-			if(c>=96) c+=26;
-			*(s+i)=c;
-		}
+		else *(s+i)=c;
 	}
 	return uncyph;
 }
@@ -76,15 +71,12 @@ bool decrypt(Cipher *A, char *s){
 	char *a;
 	a=&(A->deciph[0]);
 	for(int i=0; *(s+i)!='\0'; i++){
-		c=*(a+*(s+i)-33);
+		c=*(a+*(s+i)-32);
 		if(c=='#'){
 			uncyph=false;
 			*(s+i)='#';
 		}
-		else{
-			if(c>=96) c+=26;
-			*(s+i)=c;
-		}
+		else *(s+i)=c;
 	}
 	return uncyph;
 }

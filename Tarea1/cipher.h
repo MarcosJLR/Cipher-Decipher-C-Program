@@ -12,8 +12,8 @@ typedef int bool;
 // Estructura con fecha y esquema de cifrado.
 typedef struct{
     time_t date;
-    char deciph[68];
-    char ciph[68];
+    char deciph[96];
+    char ciph[96];
 } Cipher;
 
 // Crea un nuevo esquema de cifrado y retorna un apuntador a el.
