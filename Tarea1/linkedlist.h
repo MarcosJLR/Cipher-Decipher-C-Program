@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "cipher2.h"
+#include "cipher.h"
 
 typedef int bool;
 #define true 1
