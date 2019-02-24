@@ -4,7 +4,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-Cipher *mkCipher(time_t dt, char *natural, char *encrypted){
+Cipher *mkCipher(long dt, char *natural, char *encrypted){
     Cipher *newCipher = malloc(sizeof (Cipher));
     int i;
     for(i=0;i<96;i++){
