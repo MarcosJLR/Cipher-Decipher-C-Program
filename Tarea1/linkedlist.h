@@ -6,8 +6,10 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stddef.h>
-#include "cipher.h"
+#include "cipher2.h"
 
 typedef int bool;
 #define true 1

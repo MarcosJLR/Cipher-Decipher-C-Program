@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "linkedlist.h"
-#include "cipher.h"
 
 typedef int bool;
 #define true 1
@@ -24,12 +21,22 @@ List *mkList(){
 int askUser(Cipher *A, Cipher *B){
     int ret = 0;
     while(ret<1 || ret>3){
-        printf("El esquema que desea insertar coincide con los esquemas de fecha:\n");
-        printf("Que desea hacer?\n");
-        printf("1. Agregarlo al esquema anterior");
-        printf("2. Crear un nuevo esquema");
-        printf("3. Agregarlo al esquema siguiete");
+        char as[20];
+        char bs[20];
+        
+        printf("\nEl esquema que desea insertar coincide con los esquemas de fecha:\n");
+        struct tm *auxtm = gmtime(&(A->date));
+        strftime(as, 20, "%d/%m/%Y",auxtm);
+        auxtm = gmtime(&(B->date));
+        strftime(bs, 20, "%d/%m/%Y",auxtm);
+        printf("-- %s\n-- %s\n", as, bs);
+        
+        printf("\nQue desea hacer?\n");
+        printf("1. Agregarlo al esquema anterior\n");
+        printf("2. Crear un nuevo esquema\n");
+        printf("3. Agregarlo al esquema siguiente\n");
         scanf("%d", &ret);
+        
         if(ret<1 || ret>3) printf("Entrada invalida!\nIntente de nuevo\n");
     }
     return ret;
@@ -110,8 +117,27 @@ bool listInsert(List *L, Cipher *data){
     return aux != -1;
 }
 
+/*void printList(List *L){
+    Node *it = L->fst;
+    printf("L: ");
+    while(it){
+        printf("(%ld, %d) ", it->data->date,it->data->x);
+        it = it->nxt;
+    }
+    printf("\n");
+}*/
+
 int main(){
 
+    /*time_t dt;
+    int x;
+    List *L = mkList(); 
+    while(1){
+        scanf("%ld %d", &dt, &x);
+        Cipher *C = mkCipher(dt, x);
+        if(!listInsert(L, C)) fprintf(stderr, "La cagaste joyita!\n");
+        printList(L);
+    }*/
     
     return 0;
 }
