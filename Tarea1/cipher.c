@@ -8,7 +8,7 @@ Cipher *mkCipher(time_t dt, char *natural, char *encrypted){
     Cipher *newCipher = malloc(sizeof (Cipher));
     int i;
     for(i=0;i<68;i++){
-    	newCipher->ciph = newCipher->deciph = '#';
+    	newCipher->ciph[i] = newCipher->deciph[i] = '#';
     }
     int n=sizeof(natural)/sizeof(natural[0]);
     for(i=0;i<n;i++){
