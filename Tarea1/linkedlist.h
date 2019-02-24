@@ -44,4 +44,19 @@ List *mkList();
 // de la misma fecha.
 bool listInsert(List *L, Cipher *data);
 
+// Elimina el esquema de cifrado de fecha dt de la lista.
+// Retorna false si no existe un esquema de cifrado con esa fecha. 
+bool listDelete(List *L, long dt);
+
+// Descifra el mensaje en s segun el el esquema de cifrado mas
+// reciente antes de la fecha dt.
+// Retorna false si no existe un esquema de cifrado para esa fecha
+bool listDecrypt(List *L, long dt, char *s);
+
+
+// Cifra el mensaje en s segun el el esquema de cifrado mas
+// reciente antes de la fecha dt.
+// Retorna false si no existe un esquema de cifrado para esa fecha
+bool listEncrypt(List *L, long dt, char *s);
+
 #endif

@@ -21,16 +21,13 @@ List *mkList(){
 int askUser(Cipher *A, Cipher *B){
     int ret = 0;
     while(ret<1 || ret>3){
-        char as[20];
-        char bs[20];
-        
         printf("\nEl esquema que desea insertar coincide con los esquemas de fecha:\n");
-        struct tm *auxtm = gmtime(&(A->date));
-        strftime(as, 20, "%d/%m/%Y",auxtm);
-        auxtm = gmtime(&(B->date));
-        strftime(bs, 20, "%d/%m/%Y",auxtm);
-        printf("-- %s\n-- %s\n", as, bs);
-        
+        int d, m, y;
+        intToDate(A->date, &d, &m, &y);
+        printf("-- %02d/%02d/%04d\n", d, m, y);
+        intToDate(B->date, &d, &m, &y);
+        printf("-- %02d/%02d/%04d\n", d, m, y);
+
         printf("\nQue desea hacer?\n");
         printf("1. Agregarlo al esquema anterior\n");
         printf("2. Crear un nuevo esquema\n");
@@ -117,8 +114,53 @@ bool listInsert(List *L, Cipher *data){
     return aux != -1;
 }
 
+bool listDelete(List *L, long dt){
+    Pnode it = L->fst;
+    while(it && it->data->date != dt)
+        it = it->nxt;
+
+    if(!it) return false;
+    
+    if(it->nxt)
+        it->nxt->prv = it->prv;
+    if(it->prv)
+        it->prv->nxt = it->nxt;
+    if(!it->prv)
+        L->fst = it->nxt;
+    if(!it->nxt)
+        L->lst = it->prv;
+    
+    L->sz--;
+    free(it);
+    return true;
+}
+
+bool listDecrypt(List *L, long dt, char *s){
+    if(L->sz == 0 || dt < L->fst->data->date){
+        fprintf(stderr, "No hay esquemas de cifrado para esa fecha.\n");
+        return false;
+    }
+    Pnode it = L->fst;
+    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    if(!decrypt(it->data, s))
+        printf("No se pudo descifrar todo el mensaje.\n");
+    return true;
+}
+
+bool listEncrypt(List *L, long dt, char *s){
+    if(L->sz == 0 || dt < L->fst->data->date){
+        fprintf(stderr, "No hay esquemas de cifrado para esa fecha.\n");
+        return false;
+    }
+    Pnode it = L->fst;
+    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    if(!encrypt(it->data, s))
+        printf("No se pudo cifrar todo el mensaje.\n");
+    return true;
+}
+
 /*void printList(List *L){
-    Node *it = L->fst;
+    Pnode it = L->fst;
     printf("L: ");
     while(it){
         printf("(%ld, %d) ", it->data->date,it->data->x);
@@ -129,13 +171,20 @@ bool listInsert(List *L, Cipher *data){
 
 int main(){
 
-    /*time_t dt;
-    int x;
+    /*long dt;
+    int x,op;
     List *L = mkList(); 
     while(1){
-        scanf("%ld %d", &dt, &x);
-        Cipher *C = mkCipher(dt, x);
-        if(!listInsert(L, C)) fprintf(stderr, "La cagaste joyita!\n");
+        scanf("%d", &op);
+        if(op){
+            scanf("%ld %d", &dt, &x);
+            Cipher *C = mkCipher(dt, x);
+            if(!listInsert(L, C)) fprintf(stderr, "La cagaste joyita!\n");
+        }
+        else{
+            scanf("%ld",&dt);
+            if(!listDelete(L, dt)) fprintf(stderr, "No habia nada en esa fecha\n");
+        }
         printList(L);
     }*/
     
