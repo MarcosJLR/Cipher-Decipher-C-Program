@@ -6,13 +6,13 @@ void printMenu(){
     printf("3. Cifrar mensajes\n");
     printf("4. Mostrar un esquema de cifrado\n");
     printf("5. Borrar un esquema de cifrado\n");
-    printf("6. Salir")
+    printf("6. Salir\n");
 }
 
 void opt1(List *L){
     printf("Modo insercion.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para volver al menu)\n");
-    char s[12];
+    char s[14];
     char nat[MAX_SZ], enc[MAX_SZ];
     int d, m, y;
     while(1){
@@ -33,7 +33,7 @@ void opt1(List *L){
 void opt2(List *L){
     printf("Modo descifrado.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para salir)");
-    char s[12];
+    char s[14];
     char mes[MAX_SZ];
     int d, m, y;
     while(1){
@@ -51,7 +51,7 @@ void opt2(List *L){
 void opt3(List *L){
     printf("Modo cifrado.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para salir)");
-    char s[12];
+    char s[14];
     char mes[MAX_SZ];
     int d, m, y;
     while(1){
@@ -64,6 +64,16 @@ void opt3(List *L){
         listEncrypt(L, dateToInt(d, m, y), mes);
         printf("%s\n", mes);    
     }
+}
+
+void opt4(List *L){
+    printf("Mostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+
+}
+
+void opt5(List *L){
+    printf("Mostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+
 }
 
 int main(){
