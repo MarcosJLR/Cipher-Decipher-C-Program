@@ -1,7 +1,7 @@
 #include "main.h"
 
 void printMenu(){
-    printf("1. Registrar nuevos mensajes cifrados y sus descifrados\n");
+    printf("\n1. Registrar nuevos mensajes cifrados y sus descifrados\n");
     printf("2. Descifrar mensajes\n");
     printf("3. Cifrar mensajes\n");
     printf("4. Mostrar un esquema de cifrado\n");
@@ -10,19 +10,22 @@ void printMenu(){
 }
 
 void opt1(List *L){
-    printf("Modo insercion.\nFormato de fecha dd/mm/yyyy\n");
+    printf("\nModo insercion.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para volver al menu)\n");
     char s[14];
-    char nat[MAX_SZ], enc[MAX_SZ];
+    char *nat, *enc;
+    size_t sz = MAX_SZ;
+    nat = malloc(sz*sizeof(char));
+    enc = malloc(sz*sizeof(char));
     int d, m, y;
     while(1){
         printf("Fecha: ");
         scanf("%s", s);
         if(s[0] == '#') return;
         printf("Cifrado: ");
-        scanf("%s", enc);
+        while(getline(&enc, &sz, stdin) <= 1);
         printf("Descifrado: ");
-        scanf("%s", nat);
+        while(getline(&nat, &sz, stdin) <= 1);
         sscanf(s, "%d/%d/%d", &d, &m, &y);
         Cipher *C = mkCipher(dateToInt(d, m, y), nat, enc);
         if(!listInsert(L, C))
@@ -31,17 +34,19 @@ void opt1(List *L){
 }
 
 void opt2(List *L){
-    printf("Modo descifrado.\nFormato de fecha dd/mm/yyyy\n");
-    printf("(inserte '#' para salir)");
+    printf("\nModo descifrado.\nFormato de fecha dd/mm/yyyy\n");
+    printf("(inserte '#' para salir)\n");
     char s[14];
-    char mes[MAX_SZ];
+    char *mes;
+    size_t sz = MAX_SZ;
+    mes = malloc(sz*sizeof(char));
     int d, m, y;
     while(1){
         printf("Fecha: ");
         scanf("%s", s);
         if(s[0] == '#') return;
         printf("Mensaje: ");
-        scanf("%s", mes);
+        while(getline(&mes, &sz, stdin) <= 1);
         sscanf(s, "%d/%d/%d", &d, &m, &y);
         listDecrypt(L, dateToInt(d, m, y), mes);
         printf("%s\n", mes);    
@@ -49,17 +54,19 @@ void opt2(List *L){
 }
 
 void opt3(List *L){
-    printf("Modo cifrado.\nFormato de fecha dd/mm/yyyy\n");
-    printf("(inserte '#' para salir)");
+    printf("\nModo cifrado.\nFormato de fecha dd/mm/yyyy\n");
+    printf("(inserte '#' para salir)\n");
     char s[14];
-    char mes[MAX_SZ];
+    char *mes;
+    size_t sz = MAX_SZ;
+    mes = malloc(sz*sizeof(char));
     int d, m, y;
     while(1){
         printf("Fecha: ");
         scanf("%s", s);
         if(s[0] == '#') return;
         printf("Mensaje: ");
-        scanf("%s", mes);
+        while(getline(&mes, &sz, stdin) <= 1);
         sscanf(s, "%d/%d/%d", &d, &m, &y);
         listEncrypt(L, dateToInt(d, m, y), mes);
         printf("%s\n", mes);    
@@ -67,7 +74,7 @@ void opt3(List *L){
 }
 
 void opt4(List *L){
-    printf("Mostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+    printf("\nMostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
     printf("Fecha: ");
     int d, m, y;
     scanf("%d/%d/%d", &d, &m, &y);
@@ -75,7 +82,7 @@ void opt4(List *L){
 }
 
 void opt5(List *L){
-    printf("Borrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+    printf("\nBorrar esquema.\nFormato de fecha dd/mm/yyyy\n");
     printf("Fecha: ");
     int d, m, y;
     scanf("%d/%d/%d", &d, &m, &y);

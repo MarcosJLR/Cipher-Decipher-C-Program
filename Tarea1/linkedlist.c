@@ -178,7 +178,7 @@ bool listPrintCipher(List *L, long dt){
 
 void printListDates(List *L){
     Pnode it = L->fst;
-    printf("Fechas de esquemas:\n");
+    printf("\nFechas de esquemas:\n");
     int d, m, y;
     while(it){
         intToDate(it->data->date, &d, &m, &y);
