@@ -83,10 +83,8 @@ bool decrypt(Cipher *A, char *s){
 void printCipher(Cipher *A){
 	int i;
 	char *deciph,*ciph;
-	for(i=0;i<95;i++){
-		*(deciph+i)=32+i;
-		*(ciph+i)=A->ciph[i];
-	}
-	printf("%s\n",deciph);
-	printf("%s\n",ciph);
+	for(i=0;i<95;i++) printf("%c",32+i);
+	printf("\n");
+	for(i=0;i<95;i++) printf("%c",A->ciph[i]);
+	printf("\n");
 }

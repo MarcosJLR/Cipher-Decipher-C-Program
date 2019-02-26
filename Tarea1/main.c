@@ -76,8 +76,10 @@ void opt3(List *L){
 void opt4(List *L){
     printf("\nMostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
     printf("Fecha: ");
+    char s[14];
     int d, m, y;
-    scanf("%d/%d/%d", &d, &m, &y);
+    scanf("%s", s);
+    sscanf(s, "%d/%d/%d", &d, &m, &y);
     listPrintCipher(L, dateToInt(d, m, y));
 }
 
