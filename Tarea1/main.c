@@ -24,6 +24,7 @@ void opt1(List *L){
         printf("Descifrado: ");
         scanf("%s", nat);
         sscanf(s, "%d/%d/%d", &d, &m, &y);
+        printf("%02d/%02d/%04d\n", d, m, y);
         Cipher *C = mkCipher(dateToInt(d, m, y), nat, enc);
         if(!listInsert(L, C))
             fprintf(stderr, "El mensaje no es consistente con uno de la misma fecha.\n");
@@ -78,7 +79,7 @@ void opt5(List *L){
 
 int main(){
 
-    List *L;
+    List *L = mkList();
     while(1){
         printMenu();
         int op;
