@@ -172,7 +172,7 @@ bool listPrintCipher(List *L, long dt){
     }
     Pnode it = L->fst;
     while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
-    printCipher(it);
+    printCipher(it->data);
     return true;
 }
 
@@ -182,7 +182,7 @@ void printListDates(List *L){
     int d, m, y;
     while(it){
         intToDate(it->data->date, &d, &m, &y);
-        printf("-- %02d/%02d/%04d\n");
+        printf("-- %02d/%02d/%04d\n", d, m, y);
         it = it->nxt;
     }
     printf("\n");

@@ -24,7 +24,6 @@ void opt1(List *L){
         printf("Descifrado: ");
         scanf("%s", nat);
         sscanf(s, "%d/%d/%d", &d, &m, &y);
-        printf("%02d/%02d/%04d\n", d, m, y);
         Cipher *C = mkCipher(dateToInt(d, m, y), nat, enc);
         if(!listInsert(L, C))
             fprintf(stderr, "El mensaje no es consistente con uno de la misma fecha.\n");
@@ -69,11 +68,18 @@ void opt3(List *L){
 
 void opt4(List *L){
     printf("Mostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
-
+    printf("Fecha: ");
+    int d, m, y;
+    scanf("%d/%d/%d", &d, &m, &y);
+    listPrintCipher(L, dateToInt(d, m, y));
 }
 
 void opt5(List *L){
-    printf("Mostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+    printf("Borrar esquema.\nFormato de fecha dd/mm/yyyy\n");
+    printf("Fecha: ");
+    int d, m, y;
+    scanf("%d/%d/%d", &d, &m, &y);
+    listDelete(L, dateToInt(d, m, y));
 
 }
 
@@ -90,6 +96,7 @@ int main(){
         if(op == 4) opt4(L);
         if(op == 5) opt5(L);
         if(op == 6) break;
+        printListDates(L);
     }
 
     return 0;
