@@ -175,9 +175,9 @@ bool listEncrypt(List *L, long dt, char *s){
     printf("\n");
 }*/
 
-int main(){
+/*int main(){
 
-    /*long dt;
+    long dt;
     int x,op;
     List *L = mkList(); 
     while(1){
@@ -192,7 +192,8 @@ int main(){
             if(!listDelete(L, dt)) fprintf(stderr, "No habia nada en esa fecha\n");
         }
         printList(L);
-    }*/
+    }
     
     return 0;
 }
+*/

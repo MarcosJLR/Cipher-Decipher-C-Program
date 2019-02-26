@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "cipher.h"
+#include "date.h"
 
 typedef int bool;
 #define true 1
