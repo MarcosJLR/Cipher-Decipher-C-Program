@@ -8,3 +8,7 @@ OBJ = cipher.o  date.o  linkedlist.o  main.o
 
 decipher: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+
+clean:
+	@rm decipher
+	@rm $(OBJ)
