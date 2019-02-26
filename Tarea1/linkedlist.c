@@ -147,7 +147,7 @@ bool listDecrypt(List *L, long dt, char *s){
         return false;
     }
     Pnode it = L->fst;
-    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    while(it->nxt != NULL && it->nxt->data->date <= dt) it = it->nxt;
     if(!decrypt(it->data, s))
         printf("No se pudo descifrar todo el mensaje.\n");
     return true;
@@ -159,7 +159,7 @@ bool listEncrypt(List *L, long dt, char *s){
         return false;
     }
     Pnode it = L->fst;
-    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    while(it->nxt != NULL && it->nxt->data->date <= dt) it = it->nxt;
     if(!encrypt(it->data, s))
         printf("No se pudo cifrar todo el mensaje.\n");
     return true;
@@ -171,7 +171,7 @@ bool listPrintCipher(List *L, long dt){
         return false;
     }
     Pnode it = L->fst;
-    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    while(it->nxt != NULL && it->nxt->data->date <= dt) it = it->nxt;
     printCipher(it->data);
     return true;
 }

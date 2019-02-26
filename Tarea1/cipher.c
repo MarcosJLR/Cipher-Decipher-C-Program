@@ -14,6 +14,8 @@ Cipher *mkCipher(long dt, char *nat, char *enc){
     i = 0;
     while(nat[i]){
 		if(nat[i] <= ' ') { i++; continue; }
+		if(newCipher->ciph[ nat[i] - 32 ] != '#' || newCipher->deciph[ enc[i] - 32 ] != '#')
+			fprintf(stderr, "El esquema de cifrado no es consistente!\n");
     	newCipher->ciph[ nat[i] - 32 ] = enc[i];
     	newCipher->deciph[ enc[i] - 32 ] = nat[i];
 		i++;
@@ -44,6 +46,7 @@ bool isCompatible(Cipher *A, Cipher *B){
 bool mergeCipher(Cipher *A, Cipher *B){
 	if(!isCompatible(A,B)) return false;
 	char *a,*b;
+	A->date = (A->date<B->date) ? A->date : B->date;
 	a = A->ciph;
 	b = B->ciph;
 	for(int i=0;i<96;i++)
