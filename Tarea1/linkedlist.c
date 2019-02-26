@@ -165,6 +165,17 @@ bool listEncrypt(List *L, long dt, char *s){
     return true;
 }
 
+bool listPrintCipher(List *L, long dt){
+    if(L->sz == 0 || dt < L->fst->data->date){
+        fprintf(stderr, "No hay esquemas de cifrado para esa fecha.\n");
+        return false;
+    }
+    Pnode it = L->fst;
+    while(it->nxt != NULL && it->nxt->data->date < dt) it = it->nxt;
+    printCipher(it);
+    return true;
+}
+
 /*void printList(List *L){
     Pnode it = L->fst;
     printf("L: ");

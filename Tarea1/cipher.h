@@ -45,4 +45,7 @@ bool encrypt(Cipher *A, char *s);
 // Retorna true de lo contrario.
 bool decrypt(Cipher *A, char *s);
 
+// Imprime un esquema de cifrado.
+void printCipher(Cipher *A);
+
 #endif

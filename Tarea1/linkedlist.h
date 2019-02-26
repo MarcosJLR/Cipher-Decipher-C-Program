@@ -54,10 +54,14 @@ bool listDelete(List *L, long dt);
 // Retorna false si no existe un esquema de cifrado para esa fecha
 bool listDecrypt(List *L, long dt, char *s);
 
-
 // Cifra el mensaje en s segun el el esquema de cifrado mas
 // reciente antes de la fecha dt.
 // Retorna false si no existe un esquema de cifrado para esa fecha
 bool listEncrypt(List *L, long dt, char *s);
+
+// Imprime el mensaje de cifrado activo para una fecha dada
+// Retorna false si no hay esquemas de cifrado en la lista para
+// dicha fecha.
+bool listPrintCipher(List *L, long dt);
 
 #endif
