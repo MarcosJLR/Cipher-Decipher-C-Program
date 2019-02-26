@@ -31,6 +31,8 @@ void opt1(List *L){
         if(!listInsert(L, C))
             fprintf(stderr, "El mensaje no es consistente con uno de la misma fecha.\n");
     }
+    free(nat);
+    free(enc);
 }
 
 void opt2(List *L){
@@ -51,6 +53,7 @@ void opt2(List *L){
         listDecrypt(L, dateToInt(d, m, y), mes);
         printf("%s\n", mes);    
     }
+    free(mes);
 }
 
 void opt3(List *L){
@@ -71,6 +74,7 @@ void opt3(List *L){
         listEncrypt(L, dateToInt(d, m, y), mes);
         printf("%s\n", mes);    
     }
+    free(mes);
 }
 
 void opt4(List *L){
