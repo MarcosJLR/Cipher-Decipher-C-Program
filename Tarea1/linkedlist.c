@@ -11,6 +11,12 @@ Pnode mkNode(Cipher *data){
     return newNode;
 }
 
+void nodeDelete(Pnode N){
+    if(!N) return;
+    if(N->data) free(N->data);
+    free(N);
+}
+
 List *mkList(){
     List *newList = malloc(sizeof (List));
     newList->fst = newList->lst = NULL;
@@ -51,12 +57,12 @@ int insertBetween(Pnode A, Pnode B, Pnode C){
         int op = askUser(A->data, C->data);
         if(op == 1) {
             mergeCipher(A->data, B->data);
-            free(B);
+            nodeDelete(B);
             return 0;
         }
         if(op == 3){
             mergeCipher(C->data, B->data);
-            free(B);
+            nodeDelete(B);
             return 0;
         }
         A->nxt = B, C->prv = B, B->prv = A, B->nxt = C;
@@ -68,12 +74,12 @@ int insertBetween(Pnode A, Pnode B, Pnode C){
     }
     if(isCompatible(A->data, B->data)){
         mergeCipher(A->data, B->data);
-        free(B);
+        nodeDelete(B);
         return 0;
     }
     if(isCompatible(B->data, C->data)){
         mergeCipher(C->data, B->data);
-        free(B);
+        nodeDelete(B);
         return 0;
     }
 }
@@ -88,7 +94,7 @@ bool listInsert(List *L, Cipher *data){
 
     Pnode it = L->fst;
     if(isBefore(data, it->data)){
-        if(mergeCipher(it->data, data)) free(N);
+        if(mergeCipher(it->data, data)) nodeDelete(N);
         else{
             it->prv = N, N->nxt = it, L->fst = N;
             L->sz++;
@@ -101,7 +107,7 @@ bool listInsert(List *L, Cipher *data){
     if(it->nxt == NULL){
         if(isSameDate(it->data, data))
             return mergeCipher(it->data, data);
-        if(mergeCipher(it->data, data)) free(N);
+        if(mergeCipher(it->data, data)) nodeDelete(N);
         else{
             it->nxt = N, N->prv = it, L->lst = N;
             L->sz++;
@@ -131,7 +137,7 @@ bool listDelete(List *L, long dt){
         L->lst = it->prv;
     
     L->sz--;
-    free(it);
+    nodeDelete(it);
     return true;
 }
 
