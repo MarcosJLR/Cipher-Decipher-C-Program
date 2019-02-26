@@ -176,15 +176,17 @@ bool listPrintCipher(List *L, long dt){
     return true;
 }
 
-/*void printList(List *L){
+void printListDates(List *L){
     Pnode it = L->fst;
-    printf("L: ");
+    printf("Fechas de esquemas:\n");
+    int d, m, y;
     while(it){
-        printf("(%ld, %d) ", it->data->date,it->data->x);
+        intToDate(it->data->date, &d, &m, &y);
+        printf("-- %02d/%02d/%04d\n");
         it = it->nxt;
     }
     printf("\n");
-}*/
+}
 
 /*int main(){
 

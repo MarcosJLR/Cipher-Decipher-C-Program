@@ -64,4 +64,7 @@ bool listEncrypt(List *L, long dt, char *s);
 // dicha fecha.
 bool listPrintCipher(List *L, long dt);
 
+// Imprime las fechas de inicio de los esquemas de cifrado en la lista.
+void printListDates(List *L);
+
 #endif
