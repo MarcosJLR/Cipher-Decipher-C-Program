@@ -1,5 +1,6 @@
 #include "main.h"
 
+// Menu de opciones
 void printMenu(){
     printf("\n1. Registrar nuevos mensajes cifrados y sus descifrados\n");
     printf("2. Descifrar mensajes\n");
@@ -9,6 +10,9 @@ void printMenu(){
     printf("6. Salir\n");
 }
 
+/* Crea un esquema de cifrado a partir de un mensaje, como se cifraria y una fecha y lo guarda
+   en una lista enlazada.
+*/
 void opt1(List *L){
     printf("\nModo insercion.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para volver al menu)\n");
@@ -34,7 +38,9 @@ void opt1(List *L){
     free(nat);
     free(enc);
 }
-
+/* Recibe un mensaje cifrado y una fecha, busca el esquema de cifrado correspondiente a 
+   esta fecha y descifra el mensaje usandolo.
+*/
 void opt2(List *L){
     printf("\nModo descifrado.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para salir)\n");
@@ -56,6 +62,9 @@ void opt2(List *L){
     free(mes);
 }
 
+/* Recibe un mensaje y una fecha, busca el esquema de cifrado correspondiente a esta fecha
+   y encripta el mensaje usandolo.
+*/
 void opt3(List *L){
     printf("\nModo cifrado.\nFormato de fecha dd/mm/yyyy\n");
     printf("(inserte '#' para salir)\n");
@@ -77,6 +86,9 @@ void opt3(List *L){
     free(mes);
 }
 
+/* Muestr un esquema de cifrado colocando una linea de caracteres ascii y debajo una linea 
+   con los caracteres que tiene asignado el esquema de cifrado para la fecha dada.
+*/
 void opt4(List *L){
     printf("\nMostrar esquema.\nFormato de fecha dd/mm/yyyy\n");
     printf("Fecha: ");
@@ -87,6 +99,7 @@ void opt4(List *L){
     listPrintCipher(L, dateToInt(d, m, y));
 }
 
+// Elimina un esquema de cifrado para una fecha dada.
 void opt5(List *L){
     printf("\nBorrar esquema.\nFormato de fecha dd/mm/yyyy\n");
     printf("Fecha: ");
